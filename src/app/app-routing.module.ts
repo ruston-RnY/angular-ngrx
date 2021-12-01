@@ -12,21 +12,12 @@ const routes: Routes = [
     path: '', component: HomeComponent
   },
   {
-    path: 'counter', component: CounterComponent
+    path: 'counter',
+    loadChildren: () => import('./components/counter/counter.module').then(m => m.CounterModule)
   },
   {
     path: 'post', component: PostComponent,
-    children: [
-      {
-        path: '', component: PostListComponent
-      },
-      {
-        path: 'add', component: CreatePostComponent
-      },
-      {
-        path: 'edit/:id', component: EditPostComponent
-      },
-    ]
+    loadChildren: () => import('./components/post/post.module').then(m => m.PostModule)
   },
 ];
 
