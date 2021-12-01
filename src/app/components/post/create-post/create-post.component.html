@@ -1,0 +1,21 @@
+<div class="create">
+   <div class="row mt-4">
+      <div class="col-6">
+         <h4 class="border-bottom py-3">Add Data</h4>
+         <form class="mt-4" [formGroup]='createForm' (submit)="onAdd()">
+            <div class="form-group">
+              <label>Title</label>
+              <input type="text" class="form-control" placeholder="Enter title" formControlName="title">
+              <small class="form-text text-danger">{{ showTitleErrors() }}</small>
+            </div>
+            <div class="form-group">
+              <label>Description</label>
+              <textarea name="" id="" cols="30" rows="5" class="form-control" formControlName="description"></textarea>
+              <small class="form-text text-danger">{{ showDescriptionErrors() }}</small>
+            </div>
+            <button type="submit" class="btn btn-primary" [disabled]="!createForm.valid">Submit</button>
+            <a routerLink="/post" class="btn btn-secondary ml-2">Cancel</a>
+          </form>
+      </div>
+   </div>
+</div>

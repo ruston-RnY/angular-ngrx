@@ -1,0 +1,25 @@
+<div class="post-list my-5">
+   <div class="d-flex">
+      <h3>All Data</h3>
+      <button class="btn btn-primary ml-3" routerLink="add">Create Data</button>
+   </div>
+   <table class="table table-striped my-3" *ngIf="posts$ | async as postData">
+      <thead>
+         <th>ID</th>
+         <th>Title</th>
+         <th>Description</th>
+         <th>Action</th>
+      </thead>
+      <tbody>
+         <tr *ngFor="let item of postData">
+            <td>{{ item.id }}</td>
+            <td>{{ item.title }}</td>
+            <td>{{ item.description }}</td>
+            <td>
+               <a [routerLink]="'edit/'+item.id" class="btn btn-success">Edit</a>
+               <button class="btn btn-danger ml-2" (click)="onDelete(item.id)">Delete</button>
+            </td>
+         </tr>
+      </tbody>
+   </table>
+</div>
