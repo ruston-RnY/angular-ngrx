@@ -3,15 +3,15 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/components/app.state';
-import { loginStart } from '../state/auth.action';
+import { signUpStart } from '../state/auth.action';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  selector: 'app-signup',
+  templateUrl: './signup.component.html',
+  styleUrls: ['./signup.component.scss']
 })
-export class LoginComponent implements OnInit {
-  loginForm: FormGroup;
+export class SignupComponent implements OnInit {
+  signUpForm: FormGroup;
 
   constructor(
     private store: Store<AppState>,
@@ -19,16 +19,16 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.loginForm = new FormGroup({
+    this.signUpForm = new FormGroup({
       email: new FormControl(null, [Validators.required, Validators.email]),
       password: new FormControl(null, [Validators.required])
     })
   }
 
   onSubmit() {
-    const email = this.loginForm.value.email;
-    const password = this.loginForm.value.password;
-    this.store.dispatch(loginStart({ email, password }));
-    // this.route.navigate(['/']);
+    const email = this.signUpForm.value.email;
+    const password = this.signUpForm.value.password;
+    this.store.dispatch(signUpStart({ email, password }));
+    this.route.navigate(['home']);
   }
 }
