@@ -1,8 +1,8 @@
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects"
 import { AuthService } from "src/app/services/auth.service";
-import { loginStart, loginSuccess, signUpStart, signUpSuccess } from "./auth.action";
-import { catchError, exhaustMap, map, tap } from "rxjs/operators";
+import { autoLogin, autoLogout, loginStart, loginSuccess, signUpStart, signUpSuccess } from "./auth.action";
+import { catchError, exhaustMap, map, mergeMap, tap } from "rxjs/operators";
 import { createReducer, Store } from "@ngrx/store";
 import { AppState } from "src/app/components/app.state";
 import { setErrorMessage, setLoadingSpinner } from "src/app/shared/shared.action";
@@ -28,6 +28,7 @@ export class AuthEffects {
                map((data) => {
                   this.store.dispatch(setLoadingSpinner({ status: false }));
                   const user = this.authServices.formatUser(data);
+                  this.authServices.setUserInLocalStorage(user);
                   return loginSuccess({ user });
                }),
                catchError((errResp) => {
@@ -49,6 +50,7 @@ export class AuthEffects {
                .pipe(map(data => {
                   this.store.dispatch(setLoadingSpinner({ status: false }));
                   const user = this.authServices.formatUser(data);
+                  this.authServices.setUserInLocalStorage(user);
                   return signUpSuccess({ user });
                }),
                   catchError((errResp) => {
@@ -79,4 +81,24 @@ export class AuthEffects {
          })
       );
    }, { dispatch: false });
+
+   autoLogin$ = createEffect(() => {
+      return this.actions$.pipe(
+         ofType(autoLogin),
+         mergeMap((action) => {
+            const user = this.authServices.getUserFromLocalStorage();
+            return of(loginSuccess({ user }));
+         })
+      )
+   });
+
+   autoLogout$ = createEffect(() => {
+      return this.actions$.pipe(
+         ofType(autoLogout),
+         map((action) => {
+            this.authServices.logout();
+            this.router.navigate(['/auth']);
+         })
+      )
+   }, { dispatch: false })
 }

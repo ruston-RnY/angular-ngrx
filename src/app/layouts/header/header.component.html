@@ -24,7 +24,7 @@
             </li>
           </ng-container> 
           <li class="nav-item" *ngIf="isAuthecticated | async">
-            <a class="nav-link btn btn-danger text-white" href="#">Logout</a>
+            <button class="nav-link btn btn-danger text-white" (click)="logOut($event)">Logout</button>
           </li>
         </ul>
       </div>
