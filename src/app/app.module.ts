@@ -13,6 +13,8 @@ import { HeaderComponent } from './layouts/header/header.component';
 import { FooterComponent } from './layouts/footer/footer.component';
 import { HomeComponent } from './components/home/home.component';
 import { EffectsModule } from '@ngrx/effects';
+import { LoadingSpinnerComponent } from './layouts/loading-spinner/loading-spinner.component';
+import { AppReducer } from './components/app.state';
 
 @NgModule({
   declarations: [
@@ -20,11 +22,12 @@ import { EffectsModule } from '@ngrx/effects';
     HeaderComponent,
     FooterComponent,
     HomeComponent,
+    LoadingSpinnerComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    StoreModule.forRoot({}),
+    StoreModule.forRoot(AppReducer),
     StoreDevtoolsModule.instrument({
       logOnly: environment.production, // Restrict extension to log-only mode
     }),
