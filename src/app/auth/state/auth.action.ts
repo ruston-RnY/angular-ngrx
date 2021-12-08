@@ -5,4 +5,4 @@ export const loginStart = createAction('LOGIN_START', props<{ email: string; pas
 export const loginSuccess = createAction('LOGIN_SUCCESS', props<{ user: User }>());
 
 export const signUpStart = createAction('SIGNUP_START', props<{ email: string; password: string }>());
-export const signUpSuccess = createAction('SIGNUP_SUCCESS');
+export const signUpSuccess = createAction('SIGNUP_SUCCESS', props<{ user: User }>());

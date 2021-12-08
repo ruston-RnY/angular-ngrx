@@ -48,8 +48,14 @@ export class AuthEffects {
                .signUp(action.email, action.password)
                .pipe(map(data => {
                   this.store.dispatch(setLoadingSpinner({ status: false }));
-                  return signUpSuccess();
-               }))
+                  const user = this.authServices.formatUser(data);
+                  return signUpSuccess({ user });
+               }),
+                  catchError((errResp) => {
+                     this.store.dispatch(setLoadingSpinner({ status: false }));
+                     const errorMessage = this.authServices.getErrorMessage(errResp.error.error.message);
+                     return of(setErrorMessage({ message: errorMessage }))
+                  }))
          })
       );
    });
@@ -58,6 +64,7 @@ export class AuthEffects {
       return this.actions$.pipe(
          ofType(loginSuccess),
          tap((action) => {
+            this.store.dispatch(setErrorMessage({ message: '' }));
             this.router.navigate(['/'])
          })
       );
@@ -67,6 +74,7 @@ export class AuthEffects {
       return this.actions$.pipe(
          ofType(signUpSuccess),
          tap((action) => {
+            this.store.dispatch(setErrorMessage({ message: '' }));
             this.router.navigate(['/auth'])
          })
       );
