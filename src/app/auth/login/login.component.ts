@@ -31,6 +31,5 @@ export class LoginComponent implements OnInit {
     const password = this.loginForm.value.password;
     this.store.dispatch(setLoadingSpinner({ status: true }));
     this.store.dispatch(loginStart({ email, password }));
-    // this.route.navigate(['/']);
   }
 }

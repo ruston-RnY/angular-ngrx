@@ -47,6 +47,7 @@ export class AuthEffects {
             return this.authServices
                .signUp(action.email, action.password)
                .pipe(map(data => {
+                  this.store.dispatch(setLoadingSpinner({ status: false }));
                   return signUpSuccess();
                }))
          })
@@ -60,5 +61,14 @@ export class AuthEffects {
             this.router.navigate(['/'])
          })
       );
-   }, { dispatch: false })
+   }, { dispatch: false });
+
+   signUpRedirect$ = createEffect(() => {
+      return this.actions$.pipe(
+         ofType(signUpSuccess),
+         tap((action) => {
+            this.router.navigate(['/auth'])
+         })
+      );
+   }, { dispatch: false });
 }

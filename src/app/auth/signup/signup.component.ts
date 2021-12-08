@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/components/app.state';
+import { setLoadingSpinner } from 'src/app/shared/shared.action';
 import { signUpStart } from '../state/auth.action';
 
 @Component({
@@ -28,7 +29,7 @@ export class SignupComponent implements OnInit {
   onSubmit() {
     const email = this.signUpForm.value.email;
     const password = this.signUpForm.value.password;
+    this.store.dispatch(setLoadingSpinner({ status: true }));
     this.store.dispatch(signUpStart({ email, password }));
-    this.route.navigate(['home']);
   }
 }
