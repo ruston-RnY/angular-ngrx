@@ -6,8 +6,8 @@ import { EffectsModule } from "@ngrx/effects";
 import { StoreModule } from "@ngrx/store";
 import { LoginComponent } from "./login/login.component";
 import { AuthEffects } from "./state/auth.effect";
-import { AuthReducer } from "./state/auth.reducer";
-import { AUTH_STATE } from "./state/auth.selector";
+// import { AuthReducer } from "./state/auth.reducer";
+// import { AUTH_STATE } from "./state/auth.selector";
 import { SignupComponent } from './signup/signup.component';
 
 const routes: Routes = [
@@ -30,7 +30,7 @@ const routes: Routes = [
       CommonModule,
       RouterModule.forChild(routes),
       ReactiveFormsModule,
-      StoreModule.forFeature(AUTH_STATE, AuthReducer),
+      // StoreModule.forFeature(AUTH_STATE, AuthReducer),
       EffectsModule.forFeature([AuthEffects])
    ]
 })

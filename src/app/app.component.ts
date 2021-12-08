@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { AppState } from './components/app.state';
-import { getLoading } from './shared/shared.selector';
+import { getErrorMessage, getLoading } from './shared/shared.selector';
 
 @Component({
   selector: 'app-root',
@@ -13,6 +13,7 @@ export class AppComponent {
   title = 'ngrx-try';
 
   showLoading: Observable<boolean>;
+  errorMessage: Observable<string>;
 
   constructor(
     private store: Store<AppState>
@@ -20,5 +21,6 @@ export class AppComponent {
 
   ngOnInit(): void {
     this.showLoading = this.store.select(getLoading);
+    this.errorMessage = this.store.select(getErrorMessage);
   }
 }

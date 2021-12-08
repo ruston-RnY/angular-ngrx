@@ -15,8 +15,16 @@
           <li class="nav-item">
             <a class="nav-link text-white" routerLink="post" routerLinkActive="active">Post</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link btn btn-primary text-white" routerLink="auth">Login</a>
+          <ng-container *ngIf="!(isAuthecticated | async)">
+            <li class="nav-item">
+              <a class="nav-link btn btn-primary text-white" routerLink="auth">Login</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link btn btn-success text-white" routerLink="auth/register">Signup</a>
+            </li>
+          </ng-container> 
+          <li class="nav-item" *ngIf="isAuthecticated | async">
+            <a class="nav-link btn btn-danger text-white" href="#">Logout</a>
           </li>
         </ul>
       </div>
