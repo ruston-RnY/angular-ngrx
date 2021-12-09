@@ -29,7 +29,7 @@ export class AuthEffects {
                   this.store.dispatch(setLoadingSpinner({ status: false }));
                   const user = this.authServices.formatUser(data);
                   this.authServices.setUserInLocalStorage(user);
-                  return loginSuccess({ user });
+                  return loginSuccess({ user, redirect: true });
                }),
                catchError((errResp) => {
                   this.store.dispatch(setLoadingSpinner({ status: false }));
@@ -51,7 +51,7 @@ export class AuthEffects {
                   this.store.dispatch(setLoadingSpinner({ status: false }));
                   const user = this.authServices.formatUser(data);
                   this.authServices.setUserInLocalStorage(user);
-                  return signUpSuccess({ user });
+                  return signUpSuccess({ user, redirect: true });
                }),
                   catchError((errResp) => {
                      this.store.dispatch(setLoadingSpinner({ status: false }));
@@ -64,10 +64,13 @@ export class AuthEffects {
 
    loginRedirect$ = createEffect(() => {
       return this.actions$.pipe(
-         ofType(loginSuccess),
+         ofType(...[loginSuccess, signUpSuccess]),
          tap((action) => {
             this.store.dispatch(setErrorMessage({ message: '' }));
-            this.router.navigate(['/'])
+
+            if (action.redirect) {
+               this.router.navigate(['/'])
+            }
          })
       );
    }, { dispatch: false });
@@ -87,7 +90,7 @@ export class AuthEffects {
          ofType(autoLogin),
          mergeMap((action) => {
             const user = this.authServices.getUserFromLocalStorage();
-            return of(loginSuccess({ user }));
+            return of(loginSuccess({ user, redirect: false }));
          })
       )
    });
