@@ -1,0 +1,76 @@
+{
+  "employee": [
+    {
+      "id": 3,
+      "name": "Josh",
+      "email": "3@gmail.com",
+      "telpon": 123,
+      "password": 123,
+      "confirmPassword": 123
+    },
+    {
+      "id": 4,
+      "name": "Abra",
+      "email": "4@gmail.com",
+      "telpon": 123,
+      "password": 123,
+      "confirmPassword": 123
+    },
+    {
+      "id": 6,
+      "name": "Toni",
+      "email": "toni@gmail.com",
+      "telpon": "6789",
+      "password": 123,
+      "confirmPassword": 123
+    },
+    {
+      "id": 7,
+      "name": "Duke",
+      "email": "duke@gmail.com",
+      "telpon": "890",
+      "password": 123,
+      "confirmPassword": 123
+    },
+    {
+      "id": 8,
+      "name": "aad",
+      "email": "ada@mail.com",
+      "telpon": "12345",
+      "password": "admin123"
+    }
+  ],
+  "dataPost": [
+    {
+      "id": 1,
+      "title": "some comment",
+      "description": "some comment"
+    },
+    {
+      "id": 2,
+      "title": "some comment 2",
+      "description": "some comment 2"
+    },
+    {
+      "id": 3,
+      "title": "some comment 3",
+      "description": "some comment 3"
+    }
+  ],
+  "signupUsers": [
+    {
+      "name": "toni",
+      "email": "toni@mail.com",
+      "password": "1234",
+      "phone": 1234,
+      "id": 1
+    },
+    {
+      "name": "",
+      "email": "",
+      "password": "",
+      "phone": "",
+      "id": 2
+    }
+  ]
+}
